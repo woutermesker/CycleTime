@@ -1,5 +1,6 @@
 ```mermaid
-graph 
+graph
+
 direction LR
 subgraph Development_Cycle
         direction TB
@@ -16,7 +17,7 @@ subgraph Development_Cycle
         F[Development] --> G[Pull Request]
         G --> H[Pull Request Review]
         H --> I[Pull Request Merge]
-        I --> J[Deployment]
+        I --> J[CI/CD]
         J --> K[Non Prod test Sign off]
         K -.-> F
         K --> L[Change Creation]
@@ -31,6 +32,8 @@ direction TB
         D[Architecture Design] --> E[Architecture Approval]
         E[Architecture Approval] 
     end
+
+
 subgraph Jira
 direction TB
         style A fill:#f3e5f5,stroke:#000,stroke-width:1px
@@ -48,6 +51,7 @@ direction TB
   Jira --> Architecture
   Jira -.-> F
   Production_Improvements --> F
+  J --> Build_and_Deploy
   O -.-> Production_Improvements
 
     subgraph Production_Improvements
@@ -58,5 +62,9 @@ direction TB
         Q[Performance tweaking] ~~~ R
         R[Observability tweaking]
     end
-   
+   subgraph Build_and_Deploy
+direction LR
+        W[Build] ~~~ T[Deploy]
+        T[Deploy] ~~~ S[Controls]
+    end
 ```
